@@ -3,4 +3,4 @@ faas-cli version
 pwd 
 ls -la
 
-docker login registry.gitlab.com -u $UserName -p $Password
+sudo docker login registry.gitlab.com -u $UserName -p $Password
