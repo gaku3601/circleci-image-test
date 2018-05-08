@@ -6,6 +6,7 @@ jobs:
             - image: gaku3601/circleci-base-image:latest
         steps:
             - checkout
+            - setup_remote_docker
             - run: echo "product!!!"
             - run: chmod 777 ./.circleci/product.deploy.sh
             - run: bash ./.circleci/product.deploy.sh
