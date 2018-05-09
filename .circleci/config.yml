@@ -15,7 +15,9 @@ workflows:
     test_and_deploy:
         jobs:
             - product:
-                context: gitlab
+                context:
+                    - gitlab
+                    - mytestserver
                 filters:
                     branches:
                       ignore: /.*/
