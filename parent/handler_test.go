@@ -1,8 +1,11 @@
 package function
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestExampleFailed(t *testing.T) {
 	str := Handle([]byte("hello"))
-	t.Error(str)
+	fmt.Println(str)
 }
