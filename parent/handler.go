@@ -4,16 +4,25 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"os"
 )
 
 // Handle a serverless request
 func Handle(req []byte) string {
-	url := os.Getenv("URL")
+	myurl := os.Getenv("URL")
 
-	resp, _ := http.Get(url)
+	values := url.Values{}
+	values.Add("myname", "gaku")
+	values.Add("myname2", "gakuo")
+	resp, _ := http.PostForm(
+		myurl,
+		values,
+	)
+
+	body, _ := ioutil.ReadAll(resp.Body)
 	defer resp.Body.Close()
 
-	byteArray, _ := ioutil.ReadAll(resp.Body)
-	return fmt.Sprintf("Hello, Go. You said: %s", string(byteArray))
+	println(string(body))
+	return fmt.Sprintf("Hello, Go. You said: %s", string(body))
 }
