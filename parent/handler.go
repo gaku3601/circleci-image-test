@@ -6,23 +6,34 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 )
 
 // Handle a serverless request
 func Handle(req []byte) string {
-	myurl := os.Getenv("URL")
-
 	values := url.Values{}
-	values.Add("myname", "gaku")
 	values.Add("myname2", "gakuo")
-	resp, _ := http.PostForm(
-		myurl,
-		values,
+
+	reqq, err := http.NewRequest(
+		"POST",
+		"http://localhost/",
+		strings.NewReader(values.Encode()),
 	)
+	if err != nil {
+		return err.Error()
+	}
 
-	body, _ := ioutil.ReadAll(resp.Body)
+	// Content-Type 設定
+	reqq.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	reqq.Host = os.Getenv("HOST")
+
+	client := &http.Client{}
+	resp, err := client.Do(reqq)
+	if err != nil {
+		return err.Error()
+	}
 	defer resp.Body.Close()
+	byteArray, _ := ioutil.ReadAll(resp.Body)
 
-	println(string(body))
-	return fmt.Sprintf("Hello, Go. You said: %s", string(body))
+	return fmt.Sprintf("Hello, Go. You said: %s", string(byteArray))
 }
