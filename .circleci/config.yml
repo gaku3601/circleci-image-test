@@ -3,7 +3,7 @@ version: 2.0
 jobs:
     product:
         docker:
-            - image: gaku3601/circleci-base-image:0.0.10
+            - image: gaku3601/circleci-base-image:latest
         steps:
             - checkout
             - setup_remote_docker
