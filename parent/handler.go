@@ -16,7 +16,7 @@ func Handle(req []byte) string {
 
 	reqq, err := http.NewRequest(
 		"POST",
-		"http://localhost/",
+		os.Getenv("link"),
 		strings.NewReader(values.Encode()),
 	)
 	if err != nil {
@@ -25,7 +25,6 @@ func Handle(req []byte) string {
 
 	// Content-Type 設定
 	reqq.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	reqq.Host = os.Getenv("HOST")
 
 	client := &http.Client{}
 	resp, err := client.Do(reqq)
