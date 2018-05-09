@@ -6,4 +6,9 @@ functions:
   hello-faas:
     lang: go
     handler: ./hello-faas
-    image: registry.gitlab.com/gaku3601/hello-faas:0.0.3
+    image: registry.gitlab.com/gaku3601/hello-faas:latest
+
+  hello-faas2:
+    lang: go
+    handler: ./hello-faas
+    image: registry.gitlab.com/gaku3601/hello-faas/two:latest
