@@ -1,0 +1,13 @@
+provider:
+  name: faas
+  gateway: http://127.0.0.1:8080
+
+functions:
+  parent:
+    lang: go
+    handler: ./parent
+    image: registry.gitlab.com/gaku3601/hello-faas/parent:latest
+  child:
+    lang: go
+    handler: ./child
+    image: registry.gitlab.com/gaku3601/hello-faas/child:latest
