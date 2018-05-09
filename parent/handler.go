@@ -14,9 +14,10 @@ func Handle(req []byte) string {
 	values := url.Values{}
 	values.Add("myname2", "gakuo")
 
+	myurl := fmt.Sprintf("http://%s:%s", os.Getenv("C1_PORT_80_TCP_ADDR"), os.Getenv("C1_PORT_80_TCP_PORT"))
 	reqq, err := http.NewRequest(
 		"POST",
-		os.Getenv("link"),
+		myurl,
 		strings.NewReader(values.Encode()),
 	)
 	if err != nil {
